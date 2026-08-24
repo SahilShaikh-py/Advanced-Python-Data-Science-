@@ -1,4 +1,4 @@
-# 📘 Master Data Analytics Teaching Syllabus (Zero-to-Hero Guide)
+# 📘 Master Data Analytics Teaching Syllabus (150-Hour Zero-to-Hero Guide)
 
 > **Course Philosophy:** Built for absolute beginners and non-programmers. Every single topic is structured into 3 clear parts:
 > 1. 📌 **Definition:** Beginner-friendly explanation in simple English.
@@ -9,17 +9,17 @@
 
 # Phase 1: Advanced Excel for Data Analytics (Days 1 – 6)
 
-## Topic 1.1: Cell Referencing (Relative vs Absolute `$A$1`)
+## Topic 1.1: Cell Referencing (Relative vs Absolute `$A$1` vs Mixed `$A1`)
 
 📌 **Definition:**
-**Cell Referencing** tells Excel which cell address to read data from when copying formulas across rows or columns.
+**Cell Referencing** specifies cell addresses in formulas and controls whether coordinates change or stay locked when formulas are copied across rows/columns.
 
 📖 **Key Theory (5 Short Bullet Points):**
-- 🔹 **Purpose:** Controls whether cell coordinates change or stay locked when dragging formulas.
-- 🔹 **Relative Referencing (`A1`):** Cell coordinates automatically change when copied down rows (e.g., `A1` becomes `A2`).
-- 🔹 **Absolute Referencing (`$A$1`):** Inserting dollar signs (`$`) locks the column and row so the cell reference never changes.
-- 🔹 **Analogy:** Absolute referencing is like anchoring a boat—no matter where you move the rope, the boat stays anchored to one spot.
-- 🔹 **Industry Application:** Used in financial spreadsheets to apply a static tax rate (e.g., GST in `$B$1`) across thousands of sales rows.
+- 🔹 **Relative Referencing (`A1`):** Cell reference automatically shifts when dragged down or across.
+- 🔹 **Absolute Referencing (`$A$1`):** Dollar signs (`$`) lock both row and column coordinates permanently.
+- 🔹 **Mixed Referencing (`$A1` / `A$1`):** Locks only the column (`$A1`) or only the row (`A$1`).
+- 🔹 **Analogy:** Like anchoring a boat—no matter where you drag the formula, `$A$1` stays anchored to one cell.
+- 🔹 **Industry Application:** Applying static tax rates (e.g., 18% GST in cell `$B$1`) across thousands of product prices.
 
 💻 **Formula Example with Explanation Comments:**
 ```excel
@@ -31,17 +31,17 @@
 
 ---
 
-## Topic 1.2: Modern Lookup Formulas (`XLOOKUP` vs `VLOOKUP`)
+## Topic 1.2: Modern Lookup Formulas (`XLOOKUP` & Wildcards)
 
 📌 **Definition:**
-**`XLOOKUP`** searches a row or column for a value and returns a matching value from another row or column.
+`XLOOKUP` searches a lookup column for a value and returns a corresponding result from another column.
 
 📖 **Key Theory (5 Short Bullet Points):**
-- 🔹 **Purpose:** Merges data from separate tables without copying and pasting manually.
-- 🔹 **Syntax:** `=XLOOKUP(lookup_val, lookup_range, return_range, [if_not_found])`.
-- 🔹 **Advantage over `VLOOKUP`:** Can lookup values to the left or right, and doesn't break if columns are inserted.
-- 🔹 **Default Match:** Performs an exact match by default (unlike `VLOOKUP` which required specifying `FALSE`).
-- 🔹 **Industry Application:** Looking up customer names and prices from a Master Catalog into daily sales orders.
+- 🔹 **Purpose:** Merges data across separate sheets without copying and pasting manually.
+- 🔹 **Syntax:** `=XLOOKUP(lookup_val, lookup_range, return_range, [if_not_found], [match_mode])`.
+- 🔹 **Left & Right Lookup:** Unlike `VLOOKUP`, `XLOOKUP` can look to the left or right seamlessly.
+- 🔹 **Wildcard Search:** Supports wildcard characters (`*` for multi-character, `?` for single character).
+- 🔹 **Industry Application:** Fetching product prices and customer addresses into transaction tables.
 
 💻 **Formula Example with Explanation Comments:**
 ```excel
@@ -51,6 +51,28 @@
 ' Products[Product_ID]: Column in Catalog to search within
 ' Products[Unit_Price]: Column containing the price to return
 ' "Not Found": Fallback text if Product ID does not exist
+```
+
+---
+
+## Topic 1.3: Dynamic Array Formulas (`FILTER`, `UNIQUE`, `SORT`)
+
+📌 **Definition:**
+**Dynamic Array Formulas** automatically spill multiple calculated results into neighboring cells based on a single formula.
+
+📖 **Key Theory (5 Short Bullet Points):**
+- 🔹 **`FILTER(array, include)`:** Filters a data range based on boolean criteria.
+- 🔹 **`UNIQUE(array)`:** Extracts a deduplicated list of unique values from a column.
+- 🔹 **`SORT(array, [sort_index], [sort_order])`:** Sorts a range by a specified column index.
+- 🔹 **Spill Range (`#`):** Reference spilled array ranges dynamically (e.g., `A2#`).
+- 🔹 **Industry Application:** Building dynamic automated executive summary lists without Pivot Tables.
+
+💻 **Formula Example with Explanation Comments:**
+```excel
+=SORT(FILTER(A2:D100, B2:B100="Mumbai"), 4, -1)
+' Explanation:
+' FILTER(A2:D100, B2:B100="Mumbai"): Filters sales rows where City is Mumbai
+' SORT(..., 4, -1): Sorts the filtered results by column 4 (Sales Amount) in descending order (-1)
 ```
 
 ---
@@ -66,7 +88,7 @@
 - 🔹 **`SELECT`:** Specifies which table columns to fetch in the output.
 - 🔹 **`WHERE`:** Filters individual rows based on conditional logic before grouping.
 - 🔹 **`ORDER BY`:** Sorts output rows in ascending (`ASC`) or descending (`DESC`) order.
-- 🔹 **`LIMIT`:** Restricts the number of returned records (useful for previewing large database tables).
+- 🔹 **`LIMIT`:** Restricts the number of returned records.
 - 🔹 **Industry Application:** Extracting top 10 customer orders in Mumbai with sales > ₹2,000.
 
 💻 **Code Example with Explanation Comments:**
@@ -81,17 +103,43 @@ LIMIT 5;                                  -- Fetch top 5 rows only
 
 ---
 
-## Topic 2.2: SQL Window Functions (`DENSE_RANK()`)
+## Topic 2.2: Conditional Branching (`CASE WHEN`)
 
 📌 **Definition:**
-A **Window Function** performs calculations across a set of table rows related to the current row without collapsing them into a single summary row.
+`CASE WHEN` evaluates conditional logic inside SQL queries to return customized column values.
+
+📖 **Key Theory (5 Short Bullet Points):**
+- 🔹 **Purpose:** Implements `if-then-else` logic directly inside SQL query results.
+- 🔹 **Syntax:** `CASE WHEN condition THEN result ELSE fallback END`.
+- 🔹 **Binning Data:** Groups continuous numbers into categorical buckets (e.g., High, Medium, Low).
+- 🔹 **Aggregation Support:** Can be wrapped inside aggregate functions `SUM(CASE WHEN ... THEN 1 ELSE 0 END)`.
+- 🔹 **Industry Application:** Categorizing customer spend into VIP vs Regular tiers.
+
+💻 **Code Example with Explanation Comments:**
+```sql
+-- Bin orders into value tiers using CASE WHEN
+SELECT Order_ID, (Quantity * Unit_Price) AS Total_Sales,
+       CASE 
+           WHEN (Quantity * Unit_Price) >= 3000 THEN 'High Value Order'
+           WHEN (Quantity * Unit_Price) >= 1500 THEN 'Medium Value Order'
+           ELSE 'Low Value Order'
+       END AS Order_Tier
+FROM orders;
+```
+
+---
+
+## Topic 2.3: SQL Window Functions (`DENSE_RANK()`, `LAG()`)
+
+📌 **Definition:**
+A **Window Function** performs calculations across a set of table rows related to the current row without collapsing individual rows.
 
 📖 **Key Theory (5 Short Bullet Points):**
 - 🔹 **Purpose:** Ranks records, calculates running totals, or computes moving averages while preserving row detail.
 - 🔹 **`OVER (PARTITION BY ... ORDER BY ...)`:** Defines the window partition group and sorting order.
 - 🔹 **`DENSE_RANK()`:** Assigns rank numbers without skipping rank numbers in case of ties.
-- 🔹 **Difference from `GROUP BY`:** `GROUP BY` collapses multiple rows into 1 summary row; Window functions keep all original rows intact.
-- 🔹 **Industry Application:** Ranking top sales representatives or top revenue products per city.
+- 🔹 **`LAG(column, offset)`:** Fetches values from previous rows within the partition.
+- 🔹 **Industry Application:** Computing Month-over-Month (MoM) revenue growth percentages.
 
 💻 **Code Example with Explanation Comments:**
 ```sql
@@ -135,46 +183,52 @@ print(f"Total Payable: ₹{final_bill}")
 
 ---
 
-## Topic 3.2: NumPy Array Vectorization vs Python Loops
+## Topic 3.2: NumPy Array Vectorization & Z-Score Outlier Detection
 
 📌 **Definition:**
-**Vectorization** is executing mathematical operations on entire data arrays simultaneously without writing explicit `for` loops.
+**Vectorization** executes mathematical operations on entire numerical arrays simultaneously without writing `for` loops. The **Z-Score** measures how many standard deviations a data point lies from the mean.
 
 📖 **Key Theory (5 Short Bullet Points):**
-- 🔹 **Purpose:** Replaces slow Python loops with C-speed optimized contiguous memory arrays.
-- 🔹 **Speed Advantage:** Executes up to $100\times$ faster than standard Python list loops.
-- 🔹 **Homogeneous Data:** All elements in a NumPy array must be of the same data type (`int64`, `float64`).
+- 🔹 **Vectorization Advantage:** Replaces slow Python loops with C-speed contiguous memory operations ($100\times$ faster).
 - 🔹 **Broadcasting:** Automatically aligns array dimensions during arithmetic operations.
-- 🔹 **Industry Impact:** Underpins all modern Data Science & Machine Learning libraries (Pandas, Scikit-learn).
+- 🔹 **Z-Score Formula:** $Z = \frac{X - \mu}{\sigma}$ (where $\mu$ is mean, $\sigma$ is standard deviation).
+- 🔹 **Outlier Threshold:** $|Z| > 3$ flags data points that lie beyond 3 standard deviations.
+- 🔹 **Industry Application:** Identifying abnormal credit card transaction fraud spikes.
 
 💻 **Code Example with Explanation Comments:**
 ```python
 import numpy as np
 
-# Portfolio stock prices stored as a 1D NumPy Array
-stock_prices = np.array([120.50, 450.00, 890.25, 1250.00, 310.75])
+# Transaction values with 1 extreme outlier (95,000)
+data = np.array([450, 500, 480, 520, 510, 490, 530, 470, 95000])
 
-# Vectorized Operation: Apply 5% brokerage fee adjustment across all stocks instantly
-adjusted_prices = stock_prices * 1.05
+# Calculate Mean and Standard Deviation
+mean_val = np.mean(data)
+std_val = np.std(data)
 
-print("Original Prices:", stock_prices)
-print("Adjusted Prices (+5% Fee):", np.round(adjusted_prices, 2))
+# Compute Z-Scores
+z_scores = (data - mean_val) / std_val
+
+# Flag outliers (|Z| > 2 for small samples)
+outliers = data[np.abs(z_scores) > 2]
+print("Mean:", mean_val, "Std:", std_val)
+print("Flagged Z-Score Outliers:", outliers)
 ```
 
 ---
 
 # Phase 4: Pandas Wrangling & Visualization (Days 19 – 24)
 
-## Topic 4.1: Data Cleaning (`isna()`, `fillna()`, `dropna()`)
+## Topic 4.1: Data Cleaning (`isna()`, `fillna()`, Winsorizing)
 
 📌 **Definition:**
-**Data Cleaning** involves detecting, imputing, or removing missing (`NaN`) values to ensure accurate analytical reporting.
+**Data Cleaning** involves detecting, imputing, or capping (`Winsorizing`) anomalous values to ensure accurate analytical reporting.
 
 📖 **Key Theory (5 Short Bullet Points):**
 - 🔹 **`isna().sum()`:** Counts total missing values in each column of a DataFrame.
 - 🔹 **`fillna(value)`:** Replaces missing values with static constants, column means, or medians.
 - 🔹 **`dropna()`:** Drops rows or columns containing missing values.
-- 🔹 **Imputation Strategy:** Use Median for numerical data and Mode for categorical text columns.
+- 🔹 **Winsorizing:** Capping extreme outliers at upper/lower percentile limits instead of deleting rows.
 - 🔹 **Common Mistake:** Blindly dropping rows (`dropna()`) reduces sample size and introduces statistical bias.
 
 💻 **Code Example with Explanation Comments:**
@@ -205,27 +259,27 @@ print(df)
 
 # Phase 5: Power BI & Capstone Projects (Days 25 – 30)
 
-## Topic 5.1: Power BI Data Modeling & DAX Measures
+## Topic 5.1: Power BI Data Modeling & DAX Time Intelligence
 
 📌 **Definition:**
-**DAX (Data Analysis Expressions)** is the formula language used in Power BI to create custom calculated columns and dynamic measures.
+**DAX Time Intelligence** functions evaluate calculations across specified date periods (YTD, QTD, YoY comparison).
 
 📖 **Key Theory (5 Short Bullet Points):**
-- 🔹 **Calculated Columns:** Evaluate row-by-row during data refresh and consume RAM storage.
-- 🔹 **Measures:** Evaluate dynamically on the fly based on report slicer filters (does not consume disk RAM).
-- 🔹 **`CALCULATE()` Function:** Modifies the filter context of a measure calculation.
-- 🔹 **Star Schema:** Organization of Fact Tables (metrics) surrounded by Dimension Tables (attributes).
-- 🔹 **Industry Application:** Calculating Year-over-Year (YoY) revenue growth and active customer counts.
+- 🔹 **Prerequisite:** Requires a dedicated, contiguous Date Table marked as a Date Table.
+- 🔹 **`TOTALYTD(measure, dates)`:** Calculates cumulative year-to-date total metrics.
+- 🔹 **`SAMEPERIODLASTYEAR(dates)`:** Returns dates shifted 1 year back for YoY comparisons.
+- 🔹 **Filter Context:** Automatically respects active report slicers and visual filters.
+- 🔹 **Industry Application:** Executive dashboard metrics comparing 2024 YTD revenue against 2023 YTD revenue.
 
 💻 **Formula Example with Explanation Comments:**
 ```dax
 -- DAX Measure: Total Sales Revenue
 Total_Revenue = SUM(Sales[Quantity]) * SUM(Sales[Unit_Price])
 
--- DAX Measure: High Value Sales (Orders > 2000)
-High_Value_Revenue = 
+-- DAX Time Intelligence Measure: Same Period Last Year Revenue
+Revenue_SPLY = 
 CALCULATE(
     [Total_Revenue],
-    Sales[Unit_Price] >= 2000
+    SAMEPERIODLASTYEAR(DimDate[Date])
 )
 ```
