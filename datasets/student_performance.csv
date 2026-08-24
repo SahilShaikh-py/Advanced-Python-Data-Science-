@@ -1,0 +1,11 @@
+Student_ID,Name,Study_Hours,Attendance_Pct,Prev_Exam_Score,Final_Score,Passed
+STU101,Aarav Sharma,6.5,88,72,78,Yes
+STU102,Ananya Roy,4.0,75,55,60,Yes
+STU103,Rohan Mehta,2.5,60,40,45,No
+STU104,Priya Patel,8.0,95,85,92,Yes
+STU105,Vikram Singh,3.0,65,48,50,No
+STU106,Sneha Gupta,7.2,90,78,84,Yes
+STU107,Karan Verma,5.5,82,68,72,Yes
+STU108,Ishita Joshi,1.5,50,35,38,No
+STU109,Rahul Nair,6.0,85,70,75,Yes
+STU110,Diya Kapoor,7.8,92,82,88,Yes
