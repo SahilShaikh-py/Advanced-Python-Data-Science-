@@ -1,6 +1,6 @@
 # 👨‍🏫 Instructor's GitHub, Google Colab & Classroom Guide
 
-This guide explains how to conduct 2–3 hour daily live teaching sessions, manage hands-on student labs using Google Colab, evaluate homework submissions, and maintain your course repository on GitHub.
+This guide explains how to conduct live teaching sessions, manage hands-on student labs using Google Colab, evaluate homework submissions, and maintain your course repository on GitHub.
 
 ---
 
@@ -13,12 +13,12 @@ To eliminate setup friction for beginner students, all course material is access
 
 ---
 
-## ⏱️ 2. The 2–3 Hour Daily Classroom Formula
+## ⏱️ 2. Classroom Teaching Formula
 
-- ⏱️ **Part 1 (45 Mins - Concept & Business Intuition):** Teach the **Simple English Definition**, **Analogy**, and **5 Short Bullet Points** from `MASTER_TEACHING_SYLLABUS.md`.
-- ⏱️ **Part 2 (60 Mins - Live Instructor Code-Along):** Share your screen and demonstrate live code execution cell-by-cell in Google Colab. Explain the `# Explanation:` comments.
-- ⏱️ **Part 3 (45 Mins - Student Practice Lab):** Give students 15–20 minutes to complete the hands-on lab exercises at the bottom of the notebook.
-- ⏱️ **Part 4 (30 Mins - Q&A & Industry Edge Cases):** Discuss edge cases, hyperparameter tuning tradeoffs, and resolve student doubts.
+- ⏱️ **Part 1 (Concept & Business Intuition):** Teach the **Simple English Definition**, **Analogy**, and **5 Short Bullet Points** from `MASTER_TEACHING_SYLLABUS.md`.
+- ⏱️ **Part 2 (Live Instructor Code-Along):** Share your screen and demonstrate live code execution cell-by-cell in Google Colab. Explain the `# Explanation:` comments.
+- ⏱️ **Part 3 (Student Practice Lab):** Give students time to complete the hands-on lab exercises at the bottom of the notebook.
+- ⏱️ **Part 4 (Q&A & Industry Edge Cases):** Discuss edge cases, hyperparameter tuning tradeoffs, and resolve student doubts.
 
 ---
 
@@ -45,7 +45,7 @@ Run these standard terminal commands to push new code, lesson notebooks, or syll
 git add .
 
 # 2. Commit with descriptive commit message
-git commit -m "Add Phase 3 XGBoost classification notebook and solution key"
+git commit -m "Update modular course syllabus and lesson notebooks"
 
 # 3. Push live to GitHub main branch
 git push origin main

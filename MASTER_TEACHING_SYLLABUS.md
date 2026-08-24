@@ -1,4 +1,4 @@
-# 📘 Master Data Science & AI Teaching Syllabus (150-Hour Zero-to-Hero Guide)
+# 📘 Master Data Science & AI Teaching Syllabus (Zero-to-Hero Guide)
 
 > **Course Philosophy:** Built for absolute beginners and non-programmers transitioning to professional Data Scientists and AI Engineers. Every topic follows a strict 3-part blueprint:
 > 1. 📌 **Definition & Analogy:** Beginner-friendly explanation in simple English.
@@ -7,7 +7,7 @@
 
 ---
 
-# Phase 1: Advanced Python & Data Science Foundations (Days 1 – 5)
+# Phase 1: Advanced Python & Data Science Foundations
 
 ## Topic 1.1: Object-Oriented Programming (OOPs) in Python
 
@@ -88,7 +88,7 @@ print("Weighted Revenue Per Store:", weighted_revenue)
 
 ---
 
-# Phase 2: Mathematics, Statistics & Interactive EDA (Days 6 – 10)
+# Phase 2: Mathematics, Statistics & Interactive EDA
 
 ## Topic 2.1: Gradient Descent & Optimization Calculus
 
@@ -163,7 +163,7 @@ else:
 
 ---
 
-# Phase 3: Machine Learning Engineering (Days 11 – 17)
+# Phase 3: Machine Learning Engineering
 
 ## Topic 3.1: Supervised Classification with XGBoost
 
@@ -215,7 +215,7 @@ print("\nClassification Report:\n", classification_report(y_test, y_pred))
 
 ---
 
-# Phase 4: Deep Learning & Vision (Days 18 – 22)
+# Phase 4: Deep Learning & Vision
 
 ## Topic 4.1: Convolutional Neural Networks (CNN) for Image Vision
 
@@ -261,7 +261,7 @@ model.summary()
 
 ---
 
-# Phase 5: Modern AI, GenAI & LLMs (Days 23 – 26)
+# Phase 5: Modern AI, GenAI & LLMs
 
 ## Topic 5.1: Vector Embeddings & ChromaDB Vector Databases
 
@@ -306,7 +306,7 @@ print(f"Similarity (King vs Pizza): {sim_king_pizza:.4f}") # Low (~0.23)
 
 ---
 
-# Phase 6: MLOps & Production Capstone (Days 27 – 30)
+# Phase 6: MLOps & Production Capstone
 
 ## Topic 6.1: Deploying Machine Learning Models via FastAPI REST Endpoint
 
